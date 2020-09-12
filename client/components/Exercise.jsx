@@ -1,8 +1,12 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const ExerciseContainer = styled.div`
+    padding: 10px;
+`;
 
 const Exercise = ({ part, side, exercise }) => {
   let target, reps, sets;
-  console.log(side);
   if (part === 'Lower' && side === 'Anterior') {
     target = 'Quadriceps';
   } else if (part === 'Lower' && side === 'Posterior') {
@@ -28,12 +32,12 @@ const Exercise = ({ part, side, exercise }) => {
     reps = '15-20';
   }
   return (
-    <div>
+    <ExerciseContainer>
       <h3>{exercise.name}</h3>
       <div>Target: {target}</div>
       <div>Reps: {reps}</div>
       <div>Sets: {sets}</div>
-    </div>
+    </ExerciseContainer>
   );
 };
 

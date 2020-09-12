@@ -2,9 +2,15 @@ import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 import FullBodyTemplate from './FullBodyTemplate.jsx';
+import Contribute from './Contribute.jsx';
 
 const Wrapper = styled.div`
   text-align: center;
+  font-family: 'Kumbh Sans', sans-serif;
+`;
+
+const Title = styled.h1`
+  font-size: 75px;
 `;
 
 class App extends React.Component {
@@ -15,10 +21,28 @@ class App extends React.Component {
       chain: '',
       side: '',
       name: '',
+      target: '',
       template: '',
       generated: false,
+      contribute: false
     }
     this.generate = this.generate.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.contributeClick = this.contributeClick.bind(this);
+  }
+
+  contributeClick() {
+    const { contribute } = this.state;
+    this.setState({
+      contribute: !contribute
+    });
+  }
+
+  handleChange(e) {
+    e.preventDefault();
+    this.setState({
+      [e.target.name]: e.target.value
+    })
   }
 
   generate() {
@@ -33,9 +57,10 @@ class App extends React.Component {
   }
 
   render () {
-
-    const { generated, type, template } = this.state;
+    console.log(this.state);
+    const { generated, type, template, contribute } = this.state;
     let div;
+    let contribution;
 
     if (generated && type === 'fullbody') {
       div = <FullBodyTemplate template={template} />
@@ -43,11 +68,18 @@ class App extends React.Component {
       div = (<div></div>);
     }
 
+    if (contribute) {
+      contribution = <Contribute handleChange={this.handleChange} />;
+    } else {
+      contribution = (<button onClick={this.contributeClick}>Contribute</button>)
+    }
+
     return (
       <Wrapper>
-        <h1>FitRoulette</h1>
+        <Title>FitRoulette</Title>
         {div}
         <button onClick={this.generate}>Generate</button>
+        {contribution}
       </Wrapper>
     );
   }
