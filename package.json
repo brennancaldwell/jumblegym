@@ -1,0 +1,19 @@
+{
+  "name": "fitroulette",
+  "version": "1.0.0",
+  "description": "workout generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brennancaldwell/hrr47-mvp.git"
+  },
+  "author": "Brennan Caldwell",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/brennancaldwell/hrr47-mvp/issues"
+  },
+  "homepage": "https://github.com/brennancaldwell/hrr47-mvp#readme"
+}
