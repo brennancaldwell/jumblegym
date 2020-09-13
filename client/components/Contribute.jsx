@@ -6,7 +6,7 @@ const ContributeMessage = styled.h2`
   padding: 5px 0 5px 0;
 `;
 
-const StyledForm = styled.form`
+const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
 `;
@@ -15,7 +15,7 @@ const StyledSelect = styled.div`
   padding: 5px;
 `;
 
-const Contribute = ({ handleChange }) => (
+const Contribute = ({ handleChange, submit }) => (
   <StyledForm>
     <ContributeMessage>
       New Exercises, New Possibilities
@@ -42,6 +42,7 @@ const Contribute = ({ handleChange }) => (
       <option value="">(Select)</option>
       <option value="Anterior">Anterior</option>
       <option value="Posterior">Posterior</option>
+      <option value="">N/A</option>
     </select>
     </StyledSelect>
     <StyledSelect>
@@ -50,10 +51,11 @@ const Contribute = ({ handleChange }) => (
       <option value="">(Select)</option>
       <option value="Single">Single</option>
       <option value="Double">Double</option>
+      <option value="">N/A</option>
     </select>
     </StyledSelect>
     <StyledSelect>
-    <button>Submit</button>
+    <button onClick={submit}>Submit</button>
     </StyledSelect>
   </StyledForm>
 );

@@ -23,8 +23,6 @@ const fullBody = () => {
     }
     db.query('SELECT * FROM legs WHERE chain = $1 and side = $2', ['Anterior', 'Double'])
       .then((data) => {
-        console.log(data);
-        console.log(data[Math.floor(Math.random() * data.length)]);
         template.lower.anterior.push(data[Math.floor(Math.random() * data.length)])
         db.query('SELECT * FROM legs WHERE chain = $1 and side = $2', ['Anterior', 'Single'])
         .then((data) => {
@@ -72,6 +70,27 @@ const fullBody = () => {
   })
 }
 
+const insert = (obj) => {
+  return new Promise((resolve, reject) => {
+    let query;
+    let options;
+    if (obj.target === 'upper' || obj.target === 'legs') {
+      query = `INSERT INTO ${obj.target} (name, chain, side) VALUES ($1, $2, $3)`;
+      options = [obj.name, obj.chain, obj.side];
+    } else if (obj.target === 'biceps' || obj.target === 'triceps' || obj.target === 'shoulders') {
+      query = `INSERT INTO ${obj.target} (name, side) VALUES ($1, $2)`;
+      options = [obj.name, obj.side];
+    } else if (obj.target === 'abs') {
+      query =  `INSERT INTO ${obj.target} (name, chain) VALUES ($1, $2)`;
+      options = [obj.name, obj.chain];
+    }
+    db.query(query, options)
+      .then((success) => resolve(success))
+      .catch((err) => reject(err));
+  })
+};
+
 module.exports = {
   fullBody,
+  insert,
 }

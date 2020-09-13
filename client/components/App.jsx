@@ -29,6 +29,7 @@ class App extends React.Component {
     this.generate = this.generate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.contributeClick = this.contributeClick.bind(this);
+    this.submitExercise = this.submitExercise.bind(this);
   }
 
   contributeClick() {
@@ -56,6 +57,34 @@ class App extends React.Component {
       });
   }
 
+  submitExercise() {
+    console.log('clicked');
+    const { target, name, chain, side } = this.state;
+    if (target === '') { error('Must specify a target muscle group!') }
+    if (target === 'upper' || target === 'lower') {
+      if (chain === '' || side === '') {
+        error('Please fill out all form fields for this muscle group!');
+      }
+    } else if (target === 'biceps' || target === 'triceps' || target === 'shoulders') {
+      if (side === '') {
+        error('Please specify single or double-sided for this muscle group!');
+      }
+    } else if (target === 'abs') {
+      if (chain === '') {
+        error('Please specify anterior (front) or posterior (back) chain for abs!');
+      }
+    }
+    axios.post('/exercise', { target, name, chain, side })
+      .then((success) => this.setState({
+        chain: '',
+        side: '',
+        name: '',
+        target: '',
+        contribute: false,
+      }))
+      .catch((err) => error('Could not post!'));
+  }
+
   render () {
     console.log(this.state);
     const { generated, type, template, contribute } = this.state;
@@ -69,7 +98,7 @@ class App extends React.Component {
     }
 
     if (contribute) {
-      contribution = <Contribute handleChange={this.handleChange} />;
+      contribution = <Contribute handleChange={this.handleChange} submit={this.submitExercise}/>;
     } else {
       contribution = (<button onClick={this.contributeClick}>Contribute</button>)
     }
