@@ -28,7 +28,7 @@ const SavedTemplatesModal = ({ savedTemplates, select }) => (
     <SaveMessage>
       Saved Templates
     </SaveMessage>
-    {savedTemplates.map((temp) => <SavedTemp id={temp._id}>{temp.name ? temp.name : `Workout on ${temp.date.slice(5,7)}/${temp.date.slice(8,10)}/${temp.date.slice(0,4)}`}</SavedTemp>)}
+    {savedTemplates.map((temp) => <SavedTemp id={temp._id} onClick={select}>{temp.name ? temp.name : `Workout on ${temp.date.slice(5,7)}/${temp.date.slice(8,10)}/${temp.date.slice(0,4)}`}</SavedTemp>)}
   </StyledContainer>
 );
 

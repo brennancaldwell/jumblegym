@@ -196,10 +196,18 @@ class App extends React.Component {
   }
 
   selectSaved(e) {
+    const { savedTemplates } = this.state;
     const id = e.target.id;
-    const selected = savedTemplates.map(temp => temp._id === id)[0].template;
+    const selected = savedTemplates.map(temp => {
+      if (temp._id === id) {
+        return temp;
+      }
+    });
+    const selectedTemp = selected[0].template[0];
     this.setState({
-      template: selected
+      template: selectedTemp,
+      generated: true,
+      savedTemplatesModal: false,
     });
   }
 
@@ -264,7 +272,6 @@ class App extends React.Component {
   render () {
     const { generated, type, template, contribute, savedTemplates } = this.state;
     let div;
-    console.log(savedTemplates);
 
     if (generated && type === 'fullbody') {
       div = <FullBodyTemplate template={template} save={this.saveToggle}/>
