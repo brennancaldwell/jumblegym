@@ -2,7 +2,18 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ExerciseContainer = styled.div`
-    padding: 10px;
+    font-family: 'Share', cursive;
+    padding: 5px 20px 20px 20px;
+    margin: 5px;
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #ffe135;
+    border-radius: 3px;
+    box-shadow: 2px 2px 5px #000000;
+`;
+
+const ExerciseName = styled.h3`
+  font-size: 25px;
 `;
 
 const Exercise = ({ part, side, exercise }) => {
@@ -33,10 +44,10 @@ const Exercise = ({ part, side, exercise }) => {
   }
   return (
     <ExerciseContainer>
-      <h3>{exercise.name}</h3>
-      <div>Target: {target}</div>
-      <div>Reps: {reps}</div>
-      <div>Sets: {sets}</div>
+      <ExerciseName>{exercise.name}</ExerciseName>
+      <div>Target: {target}</div> <br/>
+      <div>Reps: {reps}</div> <br/>
+      <div>Sets: {sets}</div> <br/>
     </ExerciseContainer>
   );
 };

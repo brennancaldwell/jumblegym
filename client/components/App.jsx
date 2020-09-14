@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import Modal from 'react-modal';
 import FullBodyTemplate from './FullBodyTemplate.jsx';
 import Contribute from './Contribute.jsx';
+import SaveModal from './SaveModal.jsx';
+import './style.css';
 
 Modal.setAppElement('#app');
 
@@ -14,12 +16,48 @@ const Wrapper = styled.div`
 
 const Title = styled.h1`
   font-size: 75px;
+  color: #ffe135;
+  text-shadow: 2px 2px 5px #000;
+  font-family: 'Trade Winds', cursive;
 `;
 
 const SpecButton = styled.button`
-  padding: 5px;
-  font-family: 'Kumbh Sans', sans-serif;
-  width: 100px;
+  padding: 15px 30px 15px 30px;
+  margin: 10px;
+  font-family: 'Share', cursive;
+  font-size: 20px;
+  width: 150px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #ffe135;
+  border-radius: 3px;
+  cursor: pointer;
+`;
+
+const ShareButton = styled.button`
+  padding: 15px 30px 15px 30px;
+  margin: 10px;
+  font-family: 'Share', cursive;
+  font-size: 20px;
+  width: 150px;
+  color: #000;
+  background-color: #ffe135;
+  border: 1px solid #000;
+  border-radius: 3px;
+  cursor: pointer;
+`;
+
+const CloseButton = styled.div`
+  color: #ffe135;
+  font-family: 'Trade Winds', cursive;
+  font-size: 18px;
+  position: absolute;
+  top: 4%;
+  right: 4%;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 class App extends React.Component {
@@ -32,13 +70,19 @@ class App extends React.Component {
       name: '',
       target: '',
       template: '',
+      templateName: '',
+      savedTemplates: [],
       generated: false,
       contribute: false,
+      savingTemp: false,
+      savedTemplatesModal: false,
     }
     this.generate = this.generate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.submitExercise = this.submitExercise.bind(this);
     this.contributeToggle = this.contributeToggle.bind(this);
+    this.saveToggle = this.saveToggle.bind(this);
+    this.savedTemplatesModalToggle = this.savedTemplatesModalToggle.bind(this);
   }
 
   contributeToggle() {
@@ -46,6 +90,20 @@ class App extends React.Component {
     this.setState({
       contribute: !contribute,
     })
+  }
+
+  saveToggle() {
+    const { savingTemp } = this.state;
+    this.setState({
+      savingTemp: !savingTemp,
+    });
+  }
+
+  savedTemplatesModalToggle() {
+    const { savedTemplatesModal } = this.state;
+    this.setState({
+      savedTemplatesModal: !savedTemplatesModal,
+    });
   }
 
   handleChange(e) {
@@ -98,7 +156,7 @@ class App extends React.Component {
     let div;
 
     if (generated && type === 'fullbody') {
-      div = <FullBodyTemplate template={template} />
+      div = <FullBodyTemplate template={template} save={this.saveToggle}/>
     } else {
       div = (<div></div>);
     }
@@ -106,18 +164,32 @@ class App extends React.Component {
     return (
       <Wrapper>
         <Title>FitRoulette</Title>
-        <SpecButton onClick={this.contributeToggle}>Share An Exercise</SpecButton>
+        <ShareButton onClick={this.contributeToggle}>Contribute</ShareButton>
         <br />
         <Modal
           isOpen={this.state.contribute}
           onRequestClose={this.contributeToggle}
-          contentLabel="Contribute New Exercise"
+          contentLabel="Share A New Exercise"
+          className="shareExercise"
+          overlayClassName="modalOverlay"
+          closeTimeoutMS={600}
           >
             <Contribute handleChange={this.handleChange} submit={this.submitExercise}/>
-            <SpecButton onClick={this.contributeToggle}>Close Modal</SpecButton>
+            <CloseButton onClick={this.contributeToggle}>x</CloseButton>
           </Modal>
         <SpecButton onClick={this.generate}>Generate</SpecButton>
         {div}
+        <Modal
+         isOpen={this.state.savingTemp}
+         onRequestClose={this.saveToggle}
+         contentLabel="Save Template"
+         className="saveTemplate"
+         overlayClassName="modalOverlay"
+         closeTimeoutMS={600}
+         >
+           <SaveModal handleChange={this.handleChange}/>
+           <CloseButton onClick={this.saveToggle}>x</CloseButton>
+         </Modal>
       </Wrapper>
     );
   }

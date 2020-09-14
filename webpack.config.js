@@ -17,6 +17,10 @@ module.exports = {
           plugins: ["babel-plugin-styled-components"],
         },
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      }
     ],
   },
 };

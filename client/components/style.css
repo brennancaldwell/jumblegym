@@ -1,0 +1,57 @@
+.shareExercise {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #ffe135;
+  border-radius: 3px;
+  overflow: auto;
+  outline: none;
+  padding: 20px;
+  height: 400px;
+  width: 600px;
+  transition: ease-in-out;
+}
+
+.saveTemplate {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #ffe135;
+  border-radius: 3px;
+  overflow: auto;
+  outline: none;
+  padding: 20px;
+  height: 250px;
+  width: 400px;
+  transition: ease-in-out;
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.65);
+}
+
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}

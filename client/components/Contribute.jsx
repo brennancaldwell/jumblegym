@@ -2,51 +2,77 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ContributeMessage = styled.h2`
-  font-size: 30px;
-  padding: 5px 0 5px 0;
+  font-size: 40px;
+  margin: 20px;
+  color: #ffe135;
+  text-shadow: 2px 2px 5px #000;
+  font-family: 'Trade Winds', cursive;
 `;
 
 const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: 'Share', cursive;
 `;
 
 const StyledSelect = styled.div`
   padding: 5px;
   margin: 5px;
+  font-size: 20px;
 `;
 
 const SpecInput = styled.input`
   padding: 5px;
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: 'Share', cursive;
   width: 200px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #ffe135;
+  border-radius: 3px;
+  font-size: 20px;
 `;
 
 const SpecSelect = styled.select`
   padding: 5px;
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: 'Share', cursive;
   width: 200px;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #ffe135;
+  border-radius: 3px;
+  font-size: 20px;
 `;
 
 const SpecButton = styled.button`
-  padding: 5px;
-  font-family: 'Kumbh Sans', sans-serif;
+  padding: 10px 15px 10px 15px;
+  margin: 10px;
+  font-family: 'Share', cursive;
   width: 80px;
+  background-color: #ffe135;
+  color: #000;
+  border: 1px solid #000;
+  border-radius: 3px;
+  font-size: 22px;
+  cursor: pointer;
+`;
+
+const StyledLabel = styled.label`
+  margin: 8px;
+  font-size: 22px;
 `;
 
 const Contribute = ({ handleChange, submit }) => (
   <StyledForm>
     <ContributeMessage>
-      New Exercises, New Possibilities
+      Contribute An Exercise
     </ContributeMessage>
     <StyledSelect>
-    <label>Exercise: </label>
+    <StyledLabel>Exercise:   </StyledLabel>
     <SpecInput type="text" name="name" onChange={handleChange}></SpecInput>
     </StyledSelect>
     <StyledSelect>
-    <label>Target: </label>
+    <StyledLabel>Target:   </StyledLabel>
     <SpecSelect name="target" onChange={handleChange}>
       <option value="">(Select)</option>
       <option value="legs">Legs</option>
@@ -58,7 +84,7 @@ const Contribute = ({ handleChange, submit }) => (
     </SpecSelect>
     </StyledSelect>
     <StyledSelect>
-    <label>Anterior or Posterior: </label>
+    <StyledLabel>Anterior or Posterior:   </StyledLabel>
     <SpecSelect name="chain" onChange={handleChange}>
       <option value="">(Select)</option>
       <option value="Anterior">Anterior</option>
@@ -67,7 +93,7 @@ const Contribute = ({ handleChange, submit }) => (
     </SpecSelect>
     </StyledSelect>
     <StyledSelect>
-    <label>Single Sided or Double: </label>
+    <StyledLabel>Single Sided or Double:</StyledLabel>
     <SpecSelect name="side" onChange={handleChange}>
       <option value="">(Select)</option>
       <option value="Single">Single</option>
