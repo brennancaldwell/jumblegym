@@ -41,11 +41,11 @@ const SaveButton = styled.button`
 `;
 
 
-const FullBodyTemplate = ({ template, save }) => {
+const FullBodyTemplate = ({ savedName, template, save }) => {
 
   return (
     <TemplateBackground>
-      <Type>{template.type} Workout</Type>
+      <Type>{ savedName !== '' ? savedName : `${template.type} Workout`}</Type>
       <Category>Lower Body</Category>
       <Container>
       {template.lower.anterior.map((exercise) => <Exercise part={'Lower'} side={`Anterior`} exercise={exercise} />)}

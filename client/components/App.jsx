@@ -3,6 +3,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 import Modal from 'react-modal';
 import FullBodyTemplate from './FullBodyTemplate.jsx';
+import TemplateSelect from './TemplateSelect.jsx';
 import Contribute from './Contribute.jsx';
 import SaveModal from './SaveModal.jsx';
 import SavedTemplatesModal from './SavedTemplates.jsx';
@@ -65,8 +66,8 @@ const SavedBar = styled.div`
 `;
 
 const Title = styled.h1`
-  margin: 80px 0 30px 0;
-  font-size: 75px;
+  margin: 85px 0 10px 0;
+  font-size: 90px;
   color: #ffe135;
   text-shadow: 2px 2px 5px #000;
   font-family: 'Trade Winds', cursive;
@@ -80,15 +81,15 @@ const SpecButton = styled.button`
   width: 150px;
   border-radius: 3px;
   cursor: pointer;
-  color: #fff;
-  background-color: #000;
-  border: 1px solid #ffe135;
+  color: #000;
+  background-color: #ffe135;
+  border: 1px solid #000;
   transition: 125ms ease-in-out;
 
   &:hover {
-    color: #000;
-    background-color: #ffe135;
-    border: 1px solid #000;
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #ffe135;
   }
 `;
 
@@ -136,6 +137,7 @@ class App extends React.Component {
       target: '',
       template: '',
       templateName: '',
+      savedTemplateName: '',
       savedTemplates: [],
       generated: false,
       contribute: false,
@@ -198,16 +200,14 @@ class App extends React.Component {
   selectSaved(e) {
     const { savedTemplates } = this.state;
     const id = e.target.id;
-    const selected = savedTemplates.map(temp => {
-      if (temp._id === id) {
-        return temp;
-      }
-    });
+    const selected = savedTemplates.filter(temp => temp._id === id);
     const selectedTemp = selected[0].template[0];
+    const name = selected[0].name === '' ? `Workout From ${selected[0].date.slice(5,7)}/${selected[0].date.slice(8,10)}/${selected[0].date.slice(0,4)}` : selected[0].name;
     this.setState({
       template: selectedTemp,
       generated: true,
       savedTemplatesModal: false,
+      savedTemplateName: name,
     });
   }
 
@@ -224,7 +224,8 @@ class App extends React.Component {
       .then((template) => {
         this.setState({
           generated: true,
-          template: template.data
+          template: template.data,
+          savedTemplateName: '',
         });
       });
   }
@@ -270,11 +271,11 @@ class App extends React.Component {
   }
 
   render () {
-    const { generated, type, template, contribute, savedTemplates } = this.state;
+    const { generated, type, template, contribute, savedTemplates, savedTemplateName } = this.state;
     let div;
 
     if (generated && type === 'fullbody') {
-      div = <FullBodyTemplate template={template} save={this.saveToggle}/>
+      div = <FullBodyTemplate savedName={savedTemplateName} template={template} save={this.saveToggle}/>
     } else {
       div = (<div></div>);
     }
@@ -310,6 +311,7 @@ class App extends React.Component {
             <SavedTemplatesModal savedTemplates={savedTemplates} select={this.selectSaved}/>
             <CloseButton onClick={this.savedTemplatesModalToggle}>x</CloseButton>
           </Modal>
+        <TemplateSelect />
         <SpecButton onClick={this.generate}>Generate</SpecButton>
         {div}
         <Modal

@@ -17,10 +17,17 @@ const StyledContainer = styled.div`
 `;
 
 const SavedTemp = styled.div`
-  font-size: 30px;
+  font-size: 33px;
   font-family: 'Share', cursive;
   color: #ffe135;
   cursor: pointer;
+  margin: 10px;
+  overflow: scroll;
+  transition: ease-in-out;
+
+  &:hover {
+    font-weight: bold;
+  }
 `;
 
 const SavedTemplatesModal = ({ savedTemplates, select }) => (
@@ -28,7 +35,7 @@ const SavedTemplatesModal = ({ savedTemplates, select }) => (
     <SaveMessage>
       Saved Templates
     </SaveMessage>
-    {savedTemplates.map((temp) => <SavedTemp id={temp._id} onClick={select}>{temp.name ? temp.name : `Workout on ${temp.date.slice(5,7)}/${temp.date.slice(8,10)}/${temp.date.slice(0,4)}`}</SavedTemp>)}
+    {savedTemplates.map((temp) => <SavedTemp id={temp._id} onClick={select}>{temp.name ? temp.name : `Workout From ${temp.date.slice(5,7)}/${temp.date.slice(8,10)}/${temp.date.slice(0,4)}`}</SavedTemp>)}
   </StyledContainer>
 );
 
