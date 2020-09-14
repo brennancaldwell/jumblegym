@@ -51,7 +51,7 @@ const StyledSelect = styled.div`
   font-size: 20px;
 `;
 
-const SaveModal = ({ handleChange }) => (
+const SaveModal = ({ handleChange, saveTemp }) => (
   <StyledForm>
     <SaveMessage>
       Save Template
@@ -60,7 +60,7 @@ const SaveModal = ({ handleChange }) => (
       <StyledLabel>Name: </StyledLabel>
       <SpecInput type="text" name="templateName" placeholder="(Optional)" onChange={handleChange}></SpecInput>
     </StyledSelect>
-    <SpecButton>Save</SpecButton>
+    <SpecButton onClick={saveTemp}>Save</SpecButton>
   </StyledForm>
 );
 

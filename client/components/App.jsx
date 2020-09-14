@@ -83,6 +83,7 @@ class App extends React.Component {
     this.contributeToggle = this.contributeToggle.bind(this);
     this.saveToggle = this.saveToggle.bind(this);
     this.savedTemplatesModalToggle = this.savedTemplatesModalToggle.bind(this);
+    this.saveTemplate = this.saveTemplate.bind(this);
   }
 
   contributeToggle() {
@@ -104,6 +105,23 @@ class App extends React.Component {
     this.setState({
       savedTemplatesModal: !savedTemplatesModal,
     });
+  }
+
+  saveTemplate() {
+    const { template, templateName } = this.state;
+    const date = new Date();
+    const options = {
+      name: templateName,
+      type: template.type,
+      date: date,
+      template: template,
+    }
+    axios.post('/savetemplate', options)
+      .then((success) =>{
+        this.saveToggle();
+        console.log('Successful post');
+      })
+      .catch((err) => console.log(err));
   }
 
   handleChange(e) {
@@ -154,6 +172,7 @@ class App extends React.Component {
   render () {
     const { generated, type, template, contribute } = this.state;
     let div;
+    console.log(this.state.templateName);
 
     if (generated && type === 'fullbody') {
       div = <FullBodyTemplate template={template} save={this.saveToggle}/>
@@ -187,7 +206,7 @@ class App extends React.Component {
          overlayClassName="modalOverlay"
          closeTimeoutMS={600}
          >
-           <SaveModal handleChange={this.handleChange}/>
+           <SaveModal handleChange={this.handleChange} saveTemp={this.saveTemplate}/>
            <CloseButton onClick={this.saveToggle}>x</CloseButton>
          </Modal>
       </Wrapper>
