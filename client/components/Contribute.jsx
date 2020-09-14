@@ -9,10 +9,31 @@ const ContributeMessage = styled.h2`
 const StyledForm = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  font-family: 'Kumbh Sans', sans-serif;
 `;
 
 const StyledSelect = styled.div`
   padding: 5px;
+  margin: 5px;
+`;
+
+const SpecInput = styled.input`
+  padding: 5px;
+  font-family: 'Kumbh Sans', sans-serif;
+  width: 200px;
+`;
+
+const SpecSelect = styled.select`
+  padding: 5px;
+  font-family: 'Kumbh Sans', sans-serif;
+  width: 200px;
+`;
+
+const SpecButton = styled.button`
+  padding: 5px;
+  font-family: 'Kumbh Sans', sans-serif;
+  width: 80px;
 `;
 
 const Contribute = ({ handleChange, submit }) => (
@@ -22,11 +43,11 @@ const Contribute = ({ handleChange, submit }) => (
     </ContributeMessage>
     <StyledSelect>
     <label>Exercise: </label>
-    <input type="text" name="name" onChange={handleChange}></input>
+    <SpecInput type="text" name="name" onChange={handleChange}></SpecInput>
     </StyledSelect>
     <StyledSelect>
     <label>Target: </label>
-    <select name="target" onChange={handleChange}>
+    <SpecSelect name="target" onChange={handleChange}>
       <option value="">(Select)</option>
       <option value="legs">Legs</option>
       <option value="upper">Chest/Back</option>
@@ -34,28 +55,28 @@ const Contribute = ({ handleChange, submit }) => (
       <option value="shoulders">Shoulders</option>
       <option value="biceps">Biceps</option>
       <option value="triceps">Triceps</option>
-    </select>
+    </SpecSelect>
     </StyledSelect>
     <StyledSelect>
     <label>Anterior or Posterior: </label>
-    <select name="chain" onChange={handleChange}>
+    <SpecSelect name="chain" onChange={handleChange}>
       <option value="">(Select)</option>
       <option value="Anterior">Anterior</option>
       <option value="Posterior">Posterior</option>
       <option value="">N/A</option>
-    </select>
+    </SpecSelect>
     </StyledSelect>
     <StyledSelect>
     <label>Single Sided or Double: </label>
-    <select name="side" onChange={handleChange}>
+    <SpecSelect name="side" onChange={handleChange}>
       <option value="">(Select)</option>
       <option value="Single">Single</option>
       <option value="Double">Double</option>
       <option value="">N/A</option>
-    </select>
+    </SpecSelect>
     </StyledSelect>
     <StyledSelect>
-    <button onClick={submit}>Submit</button>
+    <SpecButton onClick={submit}>Share</SpecButton>
     </StyledSelect>
   </StyledForm>
 );

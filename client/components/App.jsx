@@ -16,6 +16,12 @@ const Title = styled.h1`
   font-size: 75px;
 `;
 
+const SpecButton = styled.button`
+  padding: 5px;
+  font-family: 'Kumbh Sans', sans-serif;
+  width: 100px;
+`;
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -28,27 +34,18 @@ class App extends React.Component {
       template: '',
       generated: false,
       contribute: false,
-      modalOpen: false,
     }
     this.generate = this.generate.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.contributeClick = this.contributeClick.bind(this);
     this.submitExercise = this.submitExercise.bind(this);
-    this.modalToggle = this.modalToggle.bind(this);
+    this.contributeToggle = this.contributeToggle.bind(this);
   }
 
-  modalToggle() {
-    const { modalOpen } = this.state;
-    this.setState({
-      modalOpen: !modalOpen,
-    })
-  }
-
-  contributeClick() {
+  contributeToggle() {
     const { contribute } = this.state;
     this.setState({
-      contribute: !contribute
-    });
+      contribute: !contribute,
+    })
   }
 
   handleChange(e) {
@@ -70,7 +67,6 @@ class App extends React.Component {
   }
 
   submitExercise() {
-    console.log('clicked');
     const { target, name, chain, side } = this.state;
     if (target === '') { error('Must specify a target muscle group!') }
     if (target === 'upper' || target === 'lower') {
@@ -98,10 +94,8 @@ class App extends React.Component {
   }
 
   render () {
-    console.log(this.state);
     const { generated, type, template, contribute } = this.state;
     let div;
-    let contribution;
 
     if (generated && type === 'fullbody') {
       div = <FullBodyTemplate template={template} />
@@ -109,25 +103,20 @@ class App extends React.Component {
       div = (<div></div>);
     }
 
-    if (contribute) {
-      contribution = <Contribute handleChange={this.handleChange} submit={this.submitExercise}/>;
-    } else {
-      contribution = (<button onClick={this.contributeClick}>Contribute</button>)
-    }
-
     return (
       <Wrapper>
         <Title>FitRoulette</Title>
-        <button onClick={this.modalToggle}>Contribute</button>
+        <SpecButton onClick={this.contributeToggle}>Share An Exercise</SpecButton>
+        <br />
         <Modal
-          isOpen={this.state.modalOpen}
-          onRequestClose={this.modalToggle}
+          isOpen={this.state.contribute}
+          onRequestClose={this.contributeToggle}
           contentLabel="Contribute New Exercise"
           >
             <Contribute handleChange={this.handleChange} submit={this.submitExercise}/>
-            <button onClick={this.modalToggle}>Close Modal</button>
+            <SpecButton onClick={this.contributeToggle}>Close Modal</SpecButton>
           </Modal>
-        <button onClick={this.generate}>Generate</button>
+        <SpecButton onClick={this.generate}>Generate</SpecButton>
         {div}
       </Wrapper>
     );
@@ -135,5 +124,3 @@ class App extends React.Component {
 };
 
 export default App;
-
-//{contribution} <br />
