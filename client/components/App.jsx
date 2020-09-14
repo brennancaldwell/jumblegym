@@ -1,8 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
+import Modal from 'react-modal';
 import FullBodyTemplate from './FullBodyTemplate.jsx';
 import Contribute from './Contribute.jsx';
+
+Modal.setAppElement('#app');
 
 const Wrapper = styled.div`
   text-align: center;
@@ -24,12 +27,21 @@ class App extends React.Component {
       target: '',
       template: '',
       generated: false,
-      contribute: false
+      contribute: false,
+      modalOpen: false,
     }
     this.generate = this.generate.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.contributeClick = this.contributeClick.bind(this);
     this.submitExercise = this.submitExercise.bind(this);
+    this.modalToggle = this.modalToggle.bind(this);
+  }
+
+  modalToggle() {
+    const { modalOpen } = this.state;
+    this.setState({
+      modalOpen: !modalOpen,
+    })
   }
 
   contributeClick() {
@@ -106,12 +118,22 @@ class App extends React.Component {
     return (
       <Wrapper>
         <Title>FitRoulette</Title>
-        {div}
+        <button onClick={this.modalToggle}>Contribute</button>
+        <Modal
+          isOpen={this.state.modalOpen}
+          onRequestClose={this.modalToggle}
+          contentLabel="Contribute New Exercise"
+          >
+            <Contribute handleChange={this.handleChange} submit={this.submitExercise}/>
+            <button onClick={this.modalToggle}>Close Modal</button>
+          </Modal>
         <button onClick={this.generate}>Generate</button>
-        {contribution}
+        {div}
       </Wrapper>
     );
   }
 };
 
 export default App;
+
+//{contribution} <br />
