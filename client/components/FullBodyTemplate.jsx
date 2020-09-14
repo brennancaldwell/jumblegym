@@ -33,11 +33,11 @@ const SaveButton = styled.button`
   font-family: 'Share', cursive;
   font-size: 20px;
   width: 250px;
-  color: #000;
-  background-color: #ffe135;
-  border: 1px solid #000;
   border-radius: 3px;
   cursor: pointer;
+  color: #000;
+    background-color: #ffe135;
+    border: 1px solid #000;
 `;
 
 

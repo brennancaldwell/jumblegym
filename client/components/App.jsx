@@ -5,16 +5,67 @@ import Modal from 'react-modal';
 import FullBodyTemplate from './FullBodyTemplate.jsx';
 import Contribute from './Contribute.jsx';
 import SaveModal from './SaveModal.jsx';
+import SavedTemplatesModal from './SavedTemplates.jsx';
 import './style.css';
 
 Modal.setAppElement('#app');
 
 const Wrapper = styled.div`
   text-align: center;
-  font-family: 'Kumbh Sans', sans-serif;
+  font-family: 'Share', cursive;
+`;
+
+const NavBar = styled.nav`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  display: grid;
+  grid-gap: 0;
+  grid-template-rows: 1fr
+  grid-template-columns: 1fr 1fr;
+  font-size: 20px;
+  opacity: 0.9;
+`;
+
+const ShareBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  background-color: #ffe135;
+  cursor: pointer;
+  grid-area: 1 / 1 / span 1 / span 1;
+  transition: 125ms ease-in-out;
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+    border-bottom: .5px solid #ffe135;
+  }
+`;
+
+const SavedBar = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+  background-color: #ffe135;
+  border-left: .5px solid #000;
+  cursor: pointer;
+  grid-area: 1 / 2 / span 1 / span 1;
+  transition: 125ms ease-in-out;
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+    border-bottom: .5px solid #ffe135;
+  }
 `;
 
 const Title = styled.h1`
+  margin: 80px 0 30px 0;
   font-size: 75px;
   color: #ffe135;
   text-shadow: 2px 2px 5px #000;
@@ -27,11 +78,18 @@ const SpecButton = styled.button`
   font-family: 'Share', cursive;
   font-size: 20px;
   width: 150px;
+  border-radius: 3px;
+  cursor: pointer;
   color: #fff;
   background-color: #000;
   border: 1px solid #ffe135;
-  border-radius: 3px;
-  cursor: pointer;
+  transition: 125ms ease-in-out;
+
+  &:hover {
+    color: #000;
+    background-color: #ffe135;
+    border: 1px solid #000;
+  }
 `;
 
 const ShareButton = styled.button`
@@ -40,11 +98,18 @@ const ShareButton = styled.button`
   font-family: 'Share', cursive;
   font-size: 20px;
   width: 150px;
-  color: #000;
-  background-color: #ffe135;
-  border: 1px solid #000;
   border-radius: 3px;
   cursor: pointer;
+  color: #fff;
+  background-color: #000;
+  border: 1px solid #ffe135;
+  transition: 125ms ease-in-out;
+
+  &:hover {
+    color: #000;
+    background-color: #ffe135;
+    border: 1px solid #000;
+  }
 `;
 
 const CloseButton = styled.div`
@@ -84,12 +149,18 @@ class App extends React.Component {
     this.saveToggle = this.saveToggle.bind(this);
     this.savedTemplatesModalToggle = this.savedTemplatesModalToggle.bind(this);
     this.saveTemplate = this.saveTemplate.bind(this);
+    this.fetchSaved = this.fetchSaved.bind(this);
+    this.selectSaved = this.selectSaved.bind(this);
   }
 
   contributeToggle() {
     const { contribute } = this.state;
     this.setState({
       contribute: !contribute,
+      chain: '',
+      side: '',
+      name: '',
+      target: '',
     })
   }
 
@@ -119,9 +190,17 @@ class App extends React.Component {
     axios.post('/savetemplate', options)
       .then((success) =>{
         this.saveToggle();
-        console.log('Successful post');
+        this.fetchSaved();
       })
       .catch((err) => console.log(err));
+  }
+
+  selectSaved(e) {
+    const id = e.target.id;
+    const selected = savedTemplates.map(temp => temp._id === id)[0].template;
+    this.setState({
+      template: selected
+    });
   }
 
   handleChange(e) {
@@ -140,6 +219,19 @@ class App extends React.Component {
           template: template.data
         });
       });
+  }
+
+  fetchSaved() {
+    axios.get('/templates')
+      .then((templates) => {
+        this.setState({
+          savedTemplates: templates.data
+        })
+      });
+  }
+
+  componentDidMount() {
+    this.fetchSaved();
   }
 
   submitExercise() {
@@ -170,9 +262,9 @@ class App extends React.Component {
   }
 
   render () {
-    const { generated, type, template, contribute } = this.state;
+    const { generated, type, template, contribute, savedTemplates } = this.state;
     let div;
-    console.log(this.state.templateName);
+    console.log(savedTemplates);
 
     if (generated && type === 'fullbody') {
       div = <FullBodyTemplate template={template} save={this.saveToggle}/>
@@ -182,8 +274,12 @@ class App extends React.Component {
 
     return (
       <Wrapper>
+        <NavBar>
+          <ShareBar onClick={this.contributeToggle}>Contribute
+          </ShareBar>
+          <SavedBar onClick={this.savedTemplatesModalToggle}>Saved Templates</SavedBar>
+        </NavBar>
         <Title>FitRoulette</Title>
-        <ShareButton onClick={this.contributeToggle}>Contribute</ShareButton>
         <br />
         <Modal
           isOpen={this.state.contribute}
@@ -195,6 +291,17 @@ class App extends React.Component {
           >
             <Contribute handleChange={this.handleChange} submit={this.submitExercise}/>
             <CloseButton onClick={this.contributeToggle}>x</CloseButton>
+          </Modal>
+        <Modal
+          isOpen={this.state.savedTemplatesModal}
+          onRequestclose={this.savedTemplatesModalToggle}
+          contentlabel="Saved templates"
+          className="shareExercise"
+          overlayClassName="modalOverlay"
+          closeTimeoutMS={600}
+          >
+            <SavedTemplatesModal savedTemplates={savedTemplates} select={this.selectSaved}/>
+            <CloseButton onClick={this.savedTemplatesModalToggle}>x</CloseButton>
           </Modal>
         <SpecButton onClick={this.generate}>Generate</SpecButton>
         {div}
@@ -215,3 +322,6 @@ class App extends React.Component {
 };
 
 export default App;
+
+
+//<ShareButton onClick={this.contributeToggle}>Contribute</ShareButton>
