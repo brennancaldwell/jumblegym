@@ -9,7 +9,7 @@ const SpecSelect = styled.select`
   color: #fff;
   background-color: #000;
   border: 1px solid #ffe135;
-  border-radius: 3px;
+  border-radius: 1px;
   font-size: 20px;
 `;
 

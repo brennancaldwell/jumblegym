@@ -24,9 +24,16 @@ const SpecButton = styled.button`
   background-color: #ffe135;
   color: #000;
   border: 1px solid #000;
-  border-radius: 3px;
+  border-radius: 1px;
   font-size: 22px;
   cursor: pointer;
+  transition: 125ms ease-in-out;
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #ffe135;
+  }
 `;
 
 const SpecInput = styled.input`
@@ -36,7 +43,7 @@ const SpecInput = styled.input`
   color: #fff;
   background-color: #000;
   border: 1px solid #ffe135;
-  border-radius: 3px;
+  border-radius: 1px;
   font-size: 20px;
 `;
 

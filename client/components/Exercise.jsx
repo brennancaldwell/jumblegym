@@ -3,17 +3,37 @@ import styled from 'styled-components';
 
 const ExerciseContainer = styled.div`
     font-family: 'Share', cursive;
-    padding: 5px 20px 20px 20px;
-    margin: 5px;
+    margin: 10px;
     color: #fff;
     background-color: #000;
     border: 1px solid #ffe135;
-    border-radius: 3px;
+    border-radius: 1px;
     box-shadow: 2px 2px 5px #000000;
+    display: grid;
+    grid-template-rows: 2fr 5fr;
 `;
 
-const ExerciseName = styled.h3`
-  font-size: 25px;
+const ExerciseName = styled.div`
+  font-size: 28px;
+  background-color: #ffe135;
+  padding: 5px 20px 20px 20px;
+  color: #000;
+  grid-area: 1 / 1 / span 1 / span 1;
+`;
+
+const NameText = styled.div`
+  position: relative;
+  top: 10px;
+`;
+
+
+const ExerciseParams = styled.div`
+  margin: 25px 10px 10px 10px;
+  grid-area: 2 / 1 / span 1 / span 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 20px;
 `;
 
 const Exercise = ({ part, side, exercise }) => {
@@ -44,10 +64,14 @@ const Exercise = ({ part, side, exercise }) => {
   }
   return (
     <ExerciseContainer>
-      <ExerciseName>{exercise.name}</ExerciseName>
+      <ExerciseName>
+        <NameText>{exercise.name}</NameText>
+        </ExerciseName>
+      <ExerciseParams>
       <div>Target: {target}</div> <br/>
       <div>Reps: {reps}</div> <br/>
       <div>Sets: {sets}</div> <br/>
+      </ExerciseParams>
     </ExerciseContainer>
   );
 };

@@ -14,14 +14,14 @@ const Container = styled.div`
 `;
 
 const Type = styled.h1`
-  font-size: 50px;
+  font-size: 53px;
   color: #ffe135;
   text-shadow: 2px 2px 5px #000000;
   font-family: 'Trade Winds', cursive;
 `;
 
 const Category = styled.h2`
-  font-size: 35px;
+  font-size: 40px;
   color: #ffe135;
   font-family: 'Trade Winds', cursive;
   text-shadow: 2px 2px 5px #000000;
@@ -33,11 +33,18 @@ const SaveButton = styled.button`
   font-family: 'Share', cursive;
   font-size: 20px;
   width: 250px;
-  border-radius: 3px;
+  border-radius: 1px;
   cursor: pointer;
   color: #000;
     background-color: #ffe135;
     border: 1px solid #000;
+  transition: 125ms ease-in-out;
+
+  &:hover {
+    color: #fff;
+    background-color: #000;
+    border: 1px solid #ffe135;
+  }
 `;
 
 

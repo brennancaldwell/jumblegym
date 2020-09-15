@@ -7,13 +7,14 @@
   color: #fff;
   background-color: #000;
   border: 1px solid #ffe135;
-  border-radius: 3px;
+  border-radius: 1px;
   overflow: auto;
   outline: none;
   padding: 20px;
   height: 400px;
   width: 600px;
   transition: ease-in-out;
+  z-index: 3;
 }
 
 .saveTemplate {
@@ -25,13 +26,14 @@
   color: #fff;
   background-color: #000;
   border: 1px solid #ffe135;
-  border-radius: 3px;
+  border-radius: 1px;
   overflow: auto;
   outline: none;
   padding: 20px;
   height: 250px;
   width: 400px;
   transition: ease-in-out;
+  z-index: 3;
 }
 
 .modalOverlay {
@@ -41,6 +43,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.65);
+  z-index: 2;
 }
 
 .ReactModal__Overlay {

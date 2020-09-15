@@ -28,6 +28,7 @@ const NavBar = styled.nav`
   grid-template-columns: 1fr 1fr;
   font-size: 20px;
   opacity: 0.9;
+  z-index: 1;
 `;
 
 const ShareBar = styled.div`
@@ -78,8 +79,8 @@ const SpecButton = styled.button`
   margin: 10px;
   font-family: 'Share', cursive;
   font-size: 20px;
-  width: 150px;
-  border-radius: 3px;
+  width: 200px;
+  border-radius: 1px;
   cursor: pointer;
   color: #000;
   background-color: #ffe135;
@@ -99,7 +100,7 @@ const ShareButton = styled.button`
   font-family: 'Share', cursive;
   font-size: 20px;
   width: 150px;
-  border-radius: 3px;
+  border-radius: 1px;
   cursor: pointer;
   color: #fff;
   background-color: #000;
@@ -283,7 +284,7 @@ class App extends React.Component {
     return (
       <Wrapper>
         <NavBar>
-          <ShareBar onClick={this.contributeToggle}>Contribute
+          <ShareBar onClick={this.contributeToggle}>Submit An Exercise
           </ShareBar>
           <SavedBar onClick={this.savedTemplatesModalToggle}>Saved Templates</SavedBar>
         </NavBar>
@@ -312,7 +313,7 @@ class App extends React.Component {
             <CloseButton onClick={this.savedTemplatesModalToggle}>x</CloseButton>
           </Modal>
         <TemplateSelect />
-        <SpecButton onClick={this.generate}>Generate</SpecButton>
+        <SpecButton onClick={this.generate}>{generated ? 'Shake It Up' : 'Work Out'}</SpecButton>
         {div}
         <Modal
          isOpen={this.state.savingTemp}
