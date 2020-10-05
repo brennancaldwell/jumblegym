@@ -3,6 +3,8 @@ You've done the hard part: you woke up early, dragged yourself to the gym. You s
 
 JumbleGym is a community-driven fitness application that automatically generates science-based, balanced strength workouts based on user specifications.
 
+![Alt ](/screenshots/PageInteraction.gif?raw=true "Page Interaction")
+
 ## Why JumbleGym?
 One of the most important concepts in modern fitness is muscle confusion: in order see any benefits of exercise, we must change up the way we stimulate the muscle. Otherwise, we plateau.
 
