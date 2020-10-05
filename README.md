@@ -1,14 +1,14 @@
 # JumbleGym
 You've done the hard part: you woke up early, dragged yourself to the gym. You stand in front of the equipment wondering, "Now what?" JumbleGym is here to help!
 
-JumbleGym is a community-driven fitness application that automatically generates science-based, balanced strength workouts based on user specifications. 
+JumbleGym is a community-driven fitness application that automatically generates science-based, balanced strength workouts based on user specifications.
 
 ## Why JumbleGym?
 One of the most important concepts in modern fitness is muscle confusion: in order see any benefits of exercise, we must change up the way we stimulate the muscle. Otherwise, we plateau.
 
 In other words, if you're bored of your routine, so are your muscles.
 
-JumbleGym adds an element of chance to your regimen that keeps the body guessing and keeps the muscles growing. 
+JumbleGym adds an element of chance to your regimen that keeps the body guessing and keeps the muscles growing.
 
 ## Table of Contents
 1. [Usage](#Usage)
@@ -53,3 +53,21 @@ From within this repository's root directory, run the following:
 ```sh
 npm install
 ```
+
+## Screenshots
+
+### JumbleGym
+
+![Alt ](/screenshots/landing.png?raw=true "JumbleGym View")
+
+### Full Body Workout Template (Partial)
+
+![Alt ](/screenshots/FullBodyWorkout1.png?raw=true "Full Body Workout (Partial)")
+
+### Saved Templates
+
+![Alt ](/screenshots/SavedTemplates.png?raw=true "Saved Templates")
+
+### Submit An Exercise
+
+![Alt ](/screenshots/SubmitAnExercise.png?raw=true "Submit An Exercise")

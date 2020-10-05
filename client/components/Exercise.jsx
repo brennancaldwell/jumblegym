@@ -55,7 +55,7 @@ const Exercise = ({ part, side, exercise }) => {
   } else if (part === 'Shoulders') {
     target = 'Deltoids';
   }
-  if (exercise.side === 'Double') {
+  if (exercise.side === 'Double' && part !== 'Biceps' && part !== 'Triceps') {
     sets = '3-4';
     reps = '8-12';
   } else {

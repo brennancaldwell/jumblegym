@@ -72,7 +72,7 @@ const StyledLabel = styled.label`
 const Contribute = ({ handleChange, submit }) => (
   <StyledForm>
     <ContributeMessage>
-      Contribute An Exercise
+      Stack The Deck
     </ContributeMessage>
     <StyledSelect>
     <StyledLabel>Exercise:   </StyledLabel>

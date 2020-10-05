@@ -29,6 +29,7 @@ const NavBar = styled.nav`
   font-size: 20px;
   opacity: 0.9;
   z-index: 1;
+  font-weight: bold;
 `;
 
 const ShareBar = styled.div`
@@ -91,6 +92,8 @@ const SpecButton = styled.button`
     color: #fff;
     background-color: #000;
     border: 1px solid #ffe135;
+  }
+
   }
 `;
 
@@ -235,7 +238,7 @@ class App extends React.Component {
     axios.get('/templates')
       .then((templates) => {
         this.setState({
-          savedTemplates: templates.data
+          savedTemplates: templates.data.reverse()
         })
       });
   }
@@ -288,7 +291,7 @@ class App extends React.Component {
           </ShareBar>
           <SavedBar onClick={this.savedTemplatesModalToggle}>Saved Templates</SavedBar>
         </NavBar>
-        <Title>FitRoulette</Title>
+        <Title>JumbleGym</Title>
         <br />
         <Modal
           isOpen={this.state.contribute}
